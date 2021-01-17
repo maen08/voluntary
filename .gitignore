@@ -1,0 +1,31 @@
+# Env variables
+*.Env
+*.env
+/venv/
+venv/
+*.env/settings.py
+
+
+# File types #
+##############
+*.pyc
+*.swo
+*.swp
+*.swn
+*.sqlite3
+
+# Directories #
+###############
+logs/
+
+# Specific files #
+##################
+VMS/settings.py
+
+# OS generated files #
+######################
+.DS_Store?
+ehthumbs.db
+Icon?
+Thumbs.db
+*~

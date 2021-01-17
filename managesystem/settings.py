@@ -1,6 +1,6 @@
 import django_heroku
 import dj_database_url
-
+import os
 from decouple import config
 from pathlib import Path
 
@@ -17,7 +17,7 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['voluntary-sys.herokuapp.com']
+ALLOWED_HOSTS = ['voluntary-sys.herokuapp.com', '127.0.0.1']
 
 
 # Application definition
@@ -112,4 +112,5 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [BASE_DIR / 'static']
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'

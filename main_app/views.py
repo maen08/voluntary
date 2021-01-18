@@ -17,6 +17,9 @@ def signup_view(request):
     return render(request, template_name='signup.html')
 
 
+def onbuild_page(request):
+    return render(request, template_name='build.html')
+
 
 
 

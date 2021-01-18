@@ -1,5 +1,6 @@
 from django.shortcuts import render,redirect
-
+from django.core.mail import EmailMessage
+from django.conf import settings
 
 
 def home_view(request):
@@ -7,8 +8,33 @@ def home_view(request):
 
 
 
-from django.core.mail import EmailMessage
-from django.conf import settings
+def signin_view(request):
+    return render(request, template_name='signin.html')
+
+
+
+def signup_view(request):
+    return render(request, template_name='signup.html')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 def send_email(request):

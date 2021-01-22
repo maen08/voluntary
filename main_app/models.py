@@ -8,12 +8,12 @@ class SystemUser(models.Model):
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
     user = models.ForeignKey(User,
-     on_delete=models.CASCADE)
+     on_delete=models.CASCADE, blank=True, null=True)
     email = models.EmailField()
     skill = models.CharField(max_length=50)
 
     def __str__(self):
-        return self.user.username
+        return self.skill
     
 
 class SystemActivitie(models.Model):

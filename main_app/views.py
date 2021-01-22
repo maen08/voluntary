@@ -40,20 +40,3 @@ def onbuild_page(request):
 
 
 
-def send_email(request):
-    try:
-        email = EmailMessage(
-            'Sent from Django App',
-            'Testing email sent by maen_techie',
-            settings.EMAIL_HOST_USER,
-            ['fredy.masika@gmail.com'],
-        )
-        email.fail_silently = False
-        email.send()
-        print('EMAIL GOT SENT')
-
-    except:
-        print('NOT SENT')
-        return redirect('home')
-    
-    return render(request, template_name='email.html')

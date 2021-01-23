@@ -13,8 +13,8 @@ def home_view(request):
     return render(request, template_name='index.html')
 
 
-def signin_view(request):
-    return render(request, template_name='signin.html')
+# def signin_view(request):
+#     return render(request, template_name='signin.html')
 
 
 def onbuild_page(request):
@@ -145,3 +145,24 @@ def register(request):
 
 
     return render(request, template_name='signup.html')
+
+
+def login_view(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+
+        filter_username = User.objects.filter(username=username)
+        if not filter_username:
+            messages.warning(request, 'You dont have an account, please register!')
+            return redirect('register')
+
+        user = authenticate(
+            request,
+            username=username,password=password
+        )
+        login(request, user, backend='django.contrib.auth.backends.ModelBackend')
+        return redirect('new_activity')
+
+
+    return render(request, template_name='login.html')

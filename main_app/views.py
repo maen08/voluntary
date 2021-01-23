@@ -147,7 +147,7 @@ def register(request):
     return render(request, template_name='signup.html')
 
 
-def login_view(request):
+def login_view(request):    #not real authenticate the password
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')

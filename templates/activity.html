@@ -26,13 +26,13 @@
   <div class="card-header">
     <h4><strong>{{activity.activity_name}} </strong> </h4>
   </div>
-  <div class="card-body">
-    <p class="card-title">{{activity.description}}</p>
+  <div class="card-body"><strong>Description:</strong> <br>
+    <p class="card-title">{{activity.description}}</p> <br>
     <p class="card-text">{{activity.requirement}}</p> <br>
-    <p class="card-text">{{activity.place}}</p> 
-     <p class="card-text">{{activity.organization}}</p> 
-    <p class="card-text">Number of people required: {{activity.people_required}}</p> 
-     <p class="card-text">Duration: {{activity.duration}} Hours</p> 
+    <p class="card-text"><strong>Place: </strong>{{activity.place}}</p> 
+     <p class="card-text"><strong>Organizanion: </strong>{{activity.organization}}</p> 
+    <p class="card-text"><strong>Number of people required: </strong> {{activity.people_required}}</p> 
+     <p class="card-text"><strong>Duration: </strong>{{activity.duration}} Hours</p> 
      <p class="card-text text-sm"><i>Posted at: {{activity.time}}</i></p> 
     <button type="submit" class="btn btn-primary btn-sm">Apply</button>
   </div>

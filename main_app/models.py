@@ -16,12 +16,20 @@ class SystemUser(models.Model):
         return self.skill
     
 
+
+class SystemManager(SystemUser):
+    organization = models.CharField(max_length=50)  # give a unique field
+
+    pass
+
+
+
 class SystemActivitie(models.Model):
     activity_name = models.CharField(max_length=100)
     description = models.TextField()
     requirement = models.TextField()
     place = models.CharField(max_length=100)
-    time = models.DateTimeField()
+    time = models.DateTimeField(auto_now=True)
     duration = models.IntegerField()
     people_required = models.IntegerField()
     organization = models.CharField(max_length=100)

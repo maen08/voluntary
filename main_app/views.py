@@ -5,7 +5,7 @@ from .models import SystemUser
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
-from datetime import timezone
+from datetime import datetime
 from .models import SystemActivitie
 
 
@@ -38,6 +38,9 @@ def apply_activity(request):  # will be triggered by the apply
     return redirect('#') #redirect to his profile
     
 
+
+def applied_activity(request):
+    return render(request, template_name='applied-activity.html')
 
 
 
@@ -73,16 +76,19 @@ def create_activity(request):
         place=place,
         people_required=no_people,
         organization=organization,
-        time=timezone.now()       # double check the field
+        
+        # time=str(datetime.now)     # double check the field
 
 
     )
-    try:
-        activity.save():
-        messages.success(request, 'New jobs created')
+    print(title)
+    activity.save()
+    # try:
+    # activity.save()
+    messages.success(request, 'New jobs created')
 
-    except:
-        messages.warning(request, 'New jobs not created')
+    # except:
+        # messages.warning(request, 'New jobs not created')
 
     return render(request, template_name='create_activity.html')  # create this page
 

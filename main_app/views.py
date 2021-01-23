@@ -39,9 +39,10 @@ def applied_activity(request):
 
 def display_activity(request):
 
-    activity = SystemActivitie.objects.all()
+    activities = SystemActivitie.objects.all()
+
     args = {
-        'activity': activity
+        'activities': activities
     }
 
     return render(request, template_name='activity.html', context=args)

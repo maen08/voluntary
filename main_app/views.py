@@ -1,4 +1,4 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render, redirect
 from django.core.mail import EmailMessage
 from django.conf import settings
 from .models import SystemUser
@@ -13,87 +13,74 @@ def home_view(request):
     return render(request, template_name='index.html')
 
 
-
 def signin_view(request):
     return render(request, template_name='signin.html')
-
-
 
 
 def onbuild_page(request):
     return render(request, template_name='build.html')
 
 
-
 def apply_activity(request):  # will be triggered by the apply
-                
-                                # clicked button by applicant
-    
+
+    # clicked button by applicant
+
     queryset = SystemActivitie.objects.all()
 
     # check the number of existing/successful applicants
     # compare to the remaining chance, if true apply if not reject
 
-    
-    return redirect('#') #redirect to his profile
-    
+    return redirect('#')  # redirect to his profile
 
 
 def applied_activity(request):
     return render(request, template_name='applied-activity.html')
 
 
-
-
-
-
 def display_activity(request):
 
     activity = SystemActivitie.objects.all()
     args = {
-        'activity':activity
+        'activity': activity
     }
 
     return render(request, template_name='activity.html', context=args)
 
 
-
-
 def create_activity(request):
+    if request.method == 'POST':
+        title = request.POST.get('title')   # display time added
+        description = request.POST.get('description')
+        duration = request.POST.get('duration')
+        place = request.POST.get('place')
+        requirement = request.POST.get('requirement')
+        no_people = request.POST.get('no_people')
+        organization = request.POST.get('organization')
 
-    title = request.POST.get('title')   # display time added
-    description = request.POST.get('description')
-    duration = request.POST.get('duration')
-    place = request.POST.get('place')
-    requirement = request.POST.get('requirement')
-    no_people = request.POST.get('no_people')
-    organization = request.POST.get('organization')
+        activity = SystemActivitie(
+            activity_name=title,
+            description=description,
+            requirement=requirement,
+            place=place,
+            duration=duration,
+            people_required=no_people,
+            organization=organization,
 
-    activity = SystemActivitie(
-        activity_name=title,
-        description=description,
-        requirement=requirement,
-        place=place,
-        people_required=no_people,
-        organization=organization,
+            # time=str(datetime.now)     # double check the field
+
+
+        )
         
-        # time=str(datetime.now)     # double check the field
+        activity.save()
+        # try:
+        # activity.save()
+        messages.success(request, 'New jobs created !')
 
-
-    )
-    print(title)
-    activity.save()
-    # try:
-    # activity.save()
-    messages.success(request, 'New jobs created')
-
-    # except:
+        # except:
         # messages.warning(request, 'New jobs not created')
 
-    return render(request, template_name='create_activity.html')  # create this page
-
-
-
+        # create this page
+    return render(request, template_name='create_activity.html')
 
 
 def register(request):
@@ -125,11 +112,11 @@ def register(request):
             first_name=first_name,
             last_name=last_name,
             user=request.user
-            
+
         )
 
         sys_user.save()
-        
+
         if User:
             new_user = User.objects.create_user(
                 username=username,
@@ -146,20 +133,3 @@ def register(request):
             login(request, user, backend='django.contrib.auth.backends.ModelBackend')
 
     return render(request, template_name='signup.html')
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

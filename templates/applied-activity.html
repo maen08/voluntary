@@ -18,7 +18,7 @@
                 Status
               </th>
               <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Role
+                Action
               </th>
               <th scope="col" class="relative px-6 py-3">
                 <span class="sr-only">Edit</span>
@@ -27,37 +27,77 @@
           </thead>
           <tbody class="bg-white divide-y divide-gray-200">
             <tr>
+              {% if request.user.is_staff %}
+              {% for user in users %}
               <td class="px-6 py-4 whitespace-nowrap">
                 <div class="flex items-center">
-                  <div class="flex-shrink-0 h-10 w-10">
-                    <img class="h-10 w-10 rounded-full" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=facearea&amp;facepad=4&amp;w=256&amp;h=256&amp;q=60" alt="">
-                  </div>
+                  <!-- <div class="flex-shrink-0 h-10 w-10"> -->
+                    <!-- <img class="h-10 w-10 rounded-full" src="" alt="">  for image avatar -->
+                  <!-- </div> -->
                   <div class="ml-4">
                     <div class="text-sm font-medium text-gray-900">
-                      Jane Cooper
+                      {{ user.first_name}}  {{user.last_name}}
                     </div>
                     <div class="text-sm text-gray-500">
-                      jane.cooper@example.com
+                      {{user.email}}
                     </div>
                   </div>
                 </div>
               </td>
               <td class="px-6 py-4 whitespace-nowrap">
-                <div class="text-sm text-gray-900">Regional Paradigm Technician</div>
+                <div class="text-sm text-gray-900">{{user.skill}}</div>
                 <div class="text-sm text-gray-500">Optimization</div>
               </td>
               <td class="px-6 py-4 whitespace-nowrap">
                 <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                  Active
+                  Pending
                 </span>
               </td>
               <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                Admin
+                <a href="#">Cancel</a>
               </td>
-              <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                <a href="#" class="text-indigo-600 hover:text-indigo-900">Edit</a>
-              </td>
+
             </tr>
+            {% endfor %}
+
+
+
+              {% else %}
+              <td class="px-6 py-4 whitespace-nowrap">
+                <div class="flex items-center">
+                  <!-- <div class="flex-shrink-0 h-10 w-10"> -->
+                    <!-- <img class="h-10 w-10 rounded-full" src="" alt="">  for image avatar -->
+                  <!-- </div> -->
+                  <div class="ml-4">
+                    <div class="text-sm font-medium text-gray-900">
+                      {{ user.first_name}}  {{user.last_name}}
+                    </div>
+                    <div class="text-sm text-gray-500">
+                      {{user.email}}
+                    </div>
+                  </div>
+                </div>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <div class="text-sm text-gray-900">{{user.skill}}</div>
+                <div class="text-sm text-gray-500">Optimization</div>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                  Pending
+                </span>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                <a href="#">Cancel</a>
+              </td>
+
+            </tr>
+
+            {% endif %}
+
+
+            
+
 
             <!-- More items... -->
           </tbody>

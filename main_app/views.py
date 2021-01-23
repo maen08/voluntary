@@ -6,7 +6,7 @@ from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from datetime import datetime
-from .models import SystemActivitie
+from .models import SystemActivitie, SystemUser
 
 
 def home_view(request):
@@ -34,7 +34,14 @@ def apply_activity(request):  # will be triggered by the apply
 
 
 def applied_activity(request):
-    return render(request, template_name='applied-activity.html')
+    activities = SystemActivitie.objects.all()
+    users = SystemUser.objects.all()
+
+    args = {
+        'activities': activities,
+        'users':users
+    }
+    return render(request, template_name='applied-activity.html', context=args)
 
 
 def display_activity(request):
@@ -111,12 +118,14 @@ def register(request):
             email=email,
             skill=skill,
             first_name=first_name,
-            last_name=last_name,
-            user=request.user
+            last_name=last_name
+            # user=request.user
 
         )
 
         sys_user.save()
+
+
 
         if User:
             new_user = User.objects.create_user(
@@ -132,5 +141,7 @@ def register(request):
                 password=password
             )
             login(request, user, backend='django.contrib.auth.backends.ModelBackend')
+            return redirect('new_activity')
+
 
     return render(request, template_name='signup.html')

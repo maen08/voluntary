@@ -33,15 +33,15 @@ def apply_activity(request):  # will be triggered by the apply
     return redirect('#')  # redirect to his profile
 
 
-def applied_activity(request):
-    activities = SystemActivitie.objects.all()
-    users = SystemUser.objects.all()
+# def applied_activity(request):
+#     activities = SystemActivitie.objects.all()
+#     users = SystemUser.objects.all()
 
-    args = {
-        'activities': activities,
-        'users':users
-    }
-    return render(request, template_name='applied-activity.html', context=args)
+#     args = {
+#         'activities': activities,
+#         'users':users
+#     }
+#     return render(request, template_name='applied-activity.html', context=args)
 
 
 def display_activity(request):

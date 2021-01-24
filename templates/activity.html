@@ -19,22 +19,22 @@
 
 
 
-    {% for activity in activities %}
+    {% for actv in activities %}
     <div class="card">
     
 
   <div class="card-header">
-    <h4><strong>{{activity.activity_name}} </strong> </h4>
+    <h4><strong>{{actv.activity_name}} </strong> </h4>
     </div>
     <div class="card-body"><strong>Description:</strong> <br>
-    <p class="card-title">{{activity.description}}</p> <br>
+    <p class="card-title">{{actv.description}}</p> <br>
     <p class="card-text"><strong>Requirements:</strong>
-    <p class="card-text">{{activity.requirement}}</p> <br>
-    <p class="card-text"><strong>Place: </strong>{{activity.place}}</p> 
-     <p class="card-text"><strong>Organizanion: </strong>{{activity.organization}}</p> 
-    <p class="card-text"><strong>Number of people required: </strong> {{activity.people_required}}</p> 
-     <p class="card-text"><strong>Duration: </strong>{{activity.duration}} Hours</p> 
-     <p class="card-text text-sm"><i>Posted: {{activity.time}}</i></p> 
+    <p class="card-text">{{actv.requirement}}</p> <br>
+    <p class="card-text"><strong>Place: </strong>{{actv.place}}</p> 
+     <p class="card-text"><strong>Organizanion: </strong>{{actv.organization}}</p> 
+    <p class="card-text"><strong>Number of people required: </strong> {{actv.people_required}}</p> 
+     <p class="card-text"><strong>Duration: </strong>{{actv.duration}} Hours</p> 
+     <p class="card-text text-sm"><i>Posted: {{actv.time}}</i></p> 
     <button type="submit" class="btn btn-primary btn-sm">Apply</button>
   </div>
 </div>

@@ -44,6 +44,14 @@ def apply_activity(request):  # will be triggered by the apply
 #     return render(request, template_name='applied-activity.html', context=args)
 
 
+def applied_activity(request):
+    return render(request, template_name='done.html')
+
+
+
+
+
+
 def display_activity(request):
 
     activities = SystemActivitie.objects.all()

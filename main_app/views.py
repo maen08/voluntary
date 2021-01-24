@@ -9,12 +9,7 @@ from datetime import datetime
 from .models import SystemActivitie, SystemUser
 
 
-def home_view(request):
-    return render(request, template_name='index.html')
 
-
-# def signin_view(request):
-#     return render(request, template_name='signin.html')
 
 
 def onbuild_page(request):
@@ -33,19 +28,18 @@ def apply_activity(request):  # will be triggered by the apply
     return redirect('#')  # redirect to his profile
 
 
-# def applied_activity(request):
-#     activities = SystemActivitie.objects.all()
-#     users = SystemUser.objects.all()
-
-#     args = {
-#         'activities': activities,
-#         'users':users
-#     }
-#     return render(request, template_name='applied-activity.html', context=args)
-
-
 def applied_activity(request):
-    return render(request, template_name='done.html')
+    activities = SystemActivitie.objects.all()
+    users = SystemUser.objects.all()
+
+    args = {
+        'activities': activities,
+        'users':users
+    }
+    return render(request, template_name='applied-activity.html', context=args)
+
+
+
 
 
 

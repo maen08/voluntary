@@ -16,16 +16,16 @@ def onbuild_page(request):
     return render(request, template_name='build.html')
 
 
-def apply_activity(request):  # will be triggered by the apply
+# def apply_activity(request):  # will be triggered by the apply
 
     # clicked button by applicant
 
-    queryset = SystemActivitie.objects.all()
+    # queryset = SystemActivitie.objects.all()
 
     # check the number of existing/successful applicants
     # compare to the remaining chance, if true apply if not reject
 
-    return redirect('#')  # redirect to his profile
+    # return redirect('#')  # redirect to his profile
 
 
 def applied_activity(request):

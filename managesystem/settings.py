@@ -119,3 +119,9 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 # local server make it 'staticfiles'
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+
+# DATABASES = {'default': dj_database_url.config()}
+
+
+django_heroku.settings(locals())

@@ -41,7 +41,8 @@ def applied_activity(request):
 
 
 
-
+def nav(request):
+    return render(request, template_name='nav.html')
 
 
 

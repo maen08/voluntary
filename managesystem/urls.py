@@ -12,8 +12,8 @@ urlpatterns = [
     path('create/', views.create_activity, name='create_activity'),
     path('applied/', views.applied_activity, name='applied_activity'),
     path('login/', views.login_view, name='login'),
-    path('nav/', views.nav),
     path('logout/', views.logout_view, name='logout_view'),
+    path('apply/', views.apply_view),
 
 
 

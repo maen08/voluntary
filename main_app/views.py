@@ -153,7 +153,7 @@ def login_view(request):    #not real authenticate the password
         password = request.POST.get('password')
 
         filter_username = User.objects.filter(username=username)
-        if not filter_username and filter_username is None:
+        if not filter_username:
             messages.warning(request, 'You dont have an account, please register!')
             return redirect('register')
 

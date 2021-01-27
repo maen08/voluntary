@@ -18,11 +18,15 @@ def onbuild_page(request):
 
 def apply_view(request, activity_id):
     get_activity = get_object_or_404(SystemActivitie, pk=activity_id)
-    print(get_activity.people_required)
-    print(get_activity.place)
-    print(get_activity.time)
     no_people = get_activity.people_required
-    
+
+    no_people -= 1
+    if no_people == 0:
+        print('NOOOOOOOOOOOOOOOOOOOOOO')
+        
+    # count the number of clicks (people applied)
+    # compare to the in the DB
+
 
     messages.success(request, 'Success, Activity added!')
 

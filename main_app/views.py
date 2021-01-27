@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.core.mail import EmailMessage
 from django.conf import settings
 from .models import SystemUser
@@ -16,9 +16,22 @@ def onbuild_page(request):
     return render(request, template_name='build.html')
 
 
-def apply_view(request):
+def apply_view(request, activity_id):
+    get_activity = get_object_or_404(SystemActivitie, pk=activity_id)
+    print(get_activity.people_required)
+    print(get_activity.place)
+    print(get_activity.time)
+    no_people = get_activity.people_required
+    
+
+    messages.success(request, 'Success, Activity added!')
+
+    return redirect('new_activity')
+
+
+
     pass
- # will be triggered by the apply
+#  will be triggered by the apply
 
 #     clicked button by applicant
 

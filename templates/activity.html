@@ -1,6 +1,18 @@
 {% include 'nav.html' %}
 
 
+    {% if messages %}
+  <div class="alert alert-success alert-dismissible fade show" role="alert">
+    {% for message in messages %}
+    {{message}}
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+  <span aria-hidden="true">&times;</span>
+    </button>
+    </div>
+        {% endfor %}
+        {% endif %}
+
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -35,7 +47,7 @@
     <p class="card-text"><strong>Number of people required: </strong> {{actv.people_required}}</p> 
      <p class="card-text"><strong>Duration: </strong>{{actv.duration}} Hours</p> 
      <p class="card-text text-sm"><i>Posted: {{actv.time}}</i></p> 
-    <button type="submit" class="btn btn-primary btn-sm">Apply</button>
+    <a href="{% url 'apply' actv.id %}"><button type="button" class="btn btn-primary btn-sm">Apply</button></a>
   </div>
 </div>
 

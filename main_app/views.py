@@ -7,6 +7,25 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from datetime import datetime
 from .models import SystemActivitie, SystemUser
+from django.views.generic.base import RedirectView
+
+
+
+# class ApplyActivityCounter(RedirectView):
+#     permanent = False
+#     query_string = True
+
+#     def get_redirect_url(self, *args, **kwargs):
+#         get_activity = get_object_or_404(SystemActivitie, pk=kwargs['activity_id'])
+
+#         get_activity.update_counter()
+#         print(get_activity.update_counter())
+#         return redirect('new_activity')
+
+
+
+
+
 
 
 
@@ -20,10 +39,15 @@ def apply_view(request, activity_id):
     get_activity = get_object_or_404(SystemActivitie, pk=activity_id)
     no_people = get_activity.people_required
 
-    no_people -= 1
-    if no_people == 0:
-        print('NOOOOOOOOOOOOOOOOOOOOOO')
+    
+    # for people in range(1, no_people):
         
+    #     print(people)
+    #     if people == 0:
+    #         print('NOOOOOOOOOOOOOOOOOOOOOO')
+    #         break
+    #     break
+          
     # count the number of clicks (people applied)
     # compare to the in the DB
 
@@ -34,7 +58,7 @@ def apply_view(request, activity_id):
 
 
 
-    pass
+   
 #  will be triggered by the apply
 
 #     clicked button by applicant

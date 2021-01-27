@@ -7,7 +7,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from datetime import datetime
 from .models import SystemActivitie, SystemUser
-from django.contrib.auth.decorators import login_required
+
 
 
 
@@ -172,3 +172,8 @@ def login_view(request):    #not real authenticate the password
 
 
     return render(request, template_name='login.html')
+
+
+def logout_view(request):
+    logout(request)
+    return render(request, template_name='logout.html')

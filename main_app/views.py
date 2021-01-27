@@ -7,7 +7,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from datetime import datetime
 from .models import SystemActivitie, SystemUser
-
+from django.contrib.auth.decorators import login_required
 
 
 
@@ -56,6 +56,7 @@ def display_activity(request):
     }
 
     return render(request, template_name='activity.html', context=args)
+
 
 
 def create_activity(request):
@@ -156,16 +157,18 @@ def login_view(request):    #not real authenticate the password
         password = request.POST.get('password')
 
         filter_username = User.objects.filter(username=username)
-        if not filter_username:
+        if not filter_username and filter_username is None:
             messages.warning(request, 'You dont have an account, please register!')
             return redirect('register')
 
-        user = authenticate(
-            request,
-            username=username,password=password
-        )
-        login(request, user, backend='django.contrib.auth.backends.ModelBackend')
-        return redirect('new_activity')
+        else:
+            user = authenticate(
+                request,
+                username=username,password=password
+            )
+            
+            login(request, user, backend='django.contrib.auth.backends.ModelBackend')
+            return redirect('new_activity')
 
 
     return render(request, template_name='login.html')

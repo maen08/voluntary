@@ -44,10 +44,15 @@
     <p class="card-text">{{actv.requirement}}</p> <br>
     <p class="card-text"><strong>Place: </strong>{{actv.place}}</p> 
      <p class="card-text"><strong>Organizanion: </strong>{{actv.organization}}</p> 
-    <p class="card-text"><strong>Number of people required: </strong> {{actv.people_required}}</p> 
+    <p class="card-text"><strong>Number of people required: </strong> {{ actv.people_required }}</p> 
      <p class="card-text"><strong>Duration: </strong>{{actv.duration}} Hours</p> 
      <p class="card-text text-sm"><i>Posted: {{actv.time}}</i></p> 
+
+     {% if request.user.is_authenticated %}
     <a href="{% url 'apply' actv.id %}"><button type="button" class="btn btn-primary btn-sm">Apply</button></a>
+    {% else %}
+    <a href="{% url 'login' %}"><button type="button" class="btn btn-primary btn-sm">Apply</button></a>
+    {% endif %}
   </div>
 </div>
 

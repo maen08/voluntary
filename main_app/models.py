@@ -24,7 +24,7 @@ class SystemActivitie(models.Model):
     place = models.CharField(max_length=100)
     time = models.DateTimeField(auto_now=True)
     duration = models.IntegerField()
-    people_required = models.IntegerField()
+    people_required = models.IntegerField()    
     organization = models.CharField(max_length=100)
 
 

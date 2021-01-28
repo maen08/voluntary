@@ -8,25 +8,8 @@ from django.contrib.auth import authenticate, login, logout
 from datetime import datetime
 from .models import SystemActivitie, SystemUser
 from django.views.generic.base import RedirectView
-
-
-
-# class ApplyActivityCounter(RedirectView):
-#     permanent = False
-#     query_string = True
-
-#     def get_redirect_url(self, *args, **kwargs):
-#         get_activity = get_object_or_404(SystemActivitie, pk=kwargs['activity_id'])
-
-#         get_activity.update_counter()
-#         print(get_activity.update_counter())
-#         return redirect('new_activity')
-
-
-
-
-
-
+from hitcount.models import HitCount
+from hitcount.views import HitCountMixin
 
 
 
@@ -38,18 +21,16 @@ def onbuild_page(request):
 def apply_view(request, activity_id):
     get_activity = get_object_or_404(SystemActivitie, pk=activity_id)
     no_people = get_activity.people_required
+    # hit_count = HitCount.objects.get_for_object(people_required)
+    # hit_count_response = HitCountMixin.hit_count(request, hit_count)
+    # print(hit_count_response)
 
-    
-    # for people in range(1, no_people):
-        
-    #     print(people)
-    #     if people == 0:
-    #         print('NOOOOOOOOOOOOOOOOOOOOOO')
-    #         break
-    #     break
-          
-    # count the number of clicks (people applied)
-    # compare to the in the DB
+    no_people +=1
+
+    get_activity.save()
+
+    no_people = request.session['']
+    print(no_people)
 
 
     messages.success(request, 'Success, Activity added!')
@@ -58,20 +39,6 @@ def apply_view(request, activity_id):
 
 
 
-   
-#  will be triggered by the apply
-
-#     clicked button by applicant
-
-#     queryset = SystemActivitie.objects.all()
-#     create a list and append every user who apply
-#     count and compare the number of users, if less in list then append the user
-
-#     check the number of existing/successful applicants
-#     compare to the remaining chance, if true apply if not reject
-
-#     return redirect('#')  # redirect to his profile
-
 
 def applied_activity(request):
     activities = SystemActivitie.objects.all()
@@ -79,7 +46,7 @@ def applied_activity(request):
 
     args = {
         'activities': activities,
-        'users':users
+        'users': users
     }
     return render(request, template_name='applied-activity.html', context=args)
 
@@ -93,7 +60,6 @@ def display_activity(request):
     }
 
     return render(request, template_name='activity.html', context=args)
-
 
 
 def create_activity(request):
@@ -119,7 +85,7 @@ def create_activity(request):
 
 
         )
-        
+
         activity.save()
         # try:
         # activity.save()
@@ -166,8 +132,6 @@ def register(request):
 
         sys_user.save()
 
-
-
         if User:
             new_user = User.objects.create_user(
                 username=username,
@@ -184,29 +148,27 @@ def register(request):
             login(request, user, backend='django.contrib.auth.backends.ModelBackend')
             return redirect('new_activity')
 
-
     return render(request, template_name='signup.html')
 
 
-def login_view(request):    #not real authenticate the password
+def login_view(request):  # not real authenticate the password
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
 
         filter_username = User.objects.filter(username=username)
         if not filter_username:
-            messages.warning(request, 'You dont have an account, please register!')
+            messages.warning(
+                request, 'You dont have an account, please register!')
             return redirect('register')
 
-        
         user = authenticate(
             request,
-            username=username,password=password
+            username=username, password=password
         )
-            
+
         login(request, user, backend='django.contrib.auth.backends.ModelBackend')
         return redirect('new_activity')
-
 
     return render(request, template_name='login.html')
 

@@ -9,54 +9,83 @@ from datetime import datetime
 from .models import SystemActivitie, SystemUser
 from django.views.generic.base import RedirectView
 from hitcount.models import HitCount
-from hitcount.views import HitCountMixin
+from hitcount.views import HitCountMixin, HitCountDetailView
 
 
 
 
-def onbuild_page(request):
-    return render(request, template_name='build.html')
+# def onbuild_page(request):
+#     return render(request, template_name='build.html')
+
+
+
+# class ApplyLogicView(HitCountDetailView):
+#     model = SystemActivitie
+#     template_name = 'activity.html'
+#     count_hit = True
+#      # the primary key for the hitcount object #}
+#     {{hitcount.pk}}
+
+#          # the total hits for the object #}
+#     {{hitcount.total_hits}}
+
+
+
 
 
 def apply_view(request, activity_id):
     get_activity = get_object_or_404(SystemActivitie, pk=activity_id)
-    no_people = get_activity.people_required
-    # hit_count = HitCount.objects.get_for_object(people_required)
-    # hit_count_response = HitCountMixin.hit_count(request, hit_count)
-    # print(hit_count_response)
+    applied_people = get_activity.apply_number.add(request.user)   # just save in DB the user who applied
 
-    no_people +=1
-
-    get_activity.save()
-
-    no_people = request.session['']
-    print(no_people)
-
-
-    messages.success(request, 'Success, Activity added!')
-
+    # messages.success(request, 'Success, Activity added!')
     return redirect('new_activity')
 
+    # print(type(applied_people))
+
+    # if get_activity.people_required < int(applied_people):
+    #     print('NO ROOM FOR THIS')
+    #     messages.warning(request, 'Sorry, no chance for now!')
+
+
+    # # request.session['people_chances'] = no_people
+    # # request.session['people_applied'] = get_activity.apply_number.add(request.user)
+
+    # else:
+    #     messages.success(request, 'Success, Activity added!')
+    #     return redirect('new_activity')
+
+   
 
 
 
 def applied_activity(request):
     activities = SystemActivitie.objects.all()
     users = SystemUser.objects.all()
-
     args = {
         'activities': activities,
         'users': users
+        
     }
     return render(request, template_name='applied-activity.html', context=args)
 
 
 def display_activity(request):
+    # people_chances = request.session.get('people_chances')
+    # people_applied = request.session.get('people_applied')
 
+    # total_people = people_chances.apply_counter()
+
+    # if total_people >= people_applied:
+    #     print('NO ROOM FOR THIS')
+    #     messages.warning(request, 'Sorry, no chance for now!')
+
+    applied = get_object_or_404(SystemActivitie)
+    applied_no = applied.apply_counter()
     activities = SystemActivitie.objects.all()
 
     args = {
-        'activities': activities
+        'activities': activities,
+        'applied_no': applied_no
     }
 
     return render(request, template_name='activity.html', context=args)

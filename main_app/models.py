@@ -26,7 +26,11 @@ class SystemActivitie(models.Model):
     duration = models.IntegerField()
     people_required = models.IntegerField()    
     organization = models.CharField(max_length=100)
+    apply_number = models.ManyToManyField(User)
 
+
+    def apply_counter(self):
+        return self.apply_number.count()
 
     def __str__(self):
         return self.activity_name

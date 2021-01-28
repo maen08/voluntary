@@ -52,6 +52,9 @@
     <a href="{% url 'apply' actv.id %}"><button type="button" class="btn btn-primary btn-sm">Apply</button></a> {{ applied_no }}
     {% else %}
     <a href="{% url 'login' %}"><button type="button" class="btn btn-primary btn-sm">Apply</button></a> {{ applied_no }}
+    {% if actv.people_required <= applied_no %}
+    <a href="{% url 'login' %}"><button type="button" class="btn btn-primary btn-sm">No Chances</button></a> {{ applied_no }}
+    {% endif %}
     {% endif %}
   </div>
 </div>

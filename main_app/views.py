@@ -83,6 +83,11 @@ def display_activity(request):
     applied_no = applied.apply_counter()
     activities = SystemActivitie.objects.all()
 
+    # if applied_no > activities.people_required
+    for act in activities:
+        print(act.people_required)
+   
+
     args = {
         'activities': activities,
         'applied_no': applied_no

@@ -70,16 +70,16 @@
                   <!-- </div> -->
                   <div class="ml-4">
                     <div class="text-sm font-medium text-gray-900">
-                      {{ user.first_name}}  {{user.last_name}}
+                      {{ request.user.first_name}}  {{request.user.last_name}}
                     </div>
                     <div class="text-sm text-gray-500">
-                      {{user.email}}
+                      {{request.user.email}}
                     </div>
                   </div>
                 </div>
               </td>
               <td class="px-6 py-4 whitespace-nowrap">
-                <div class="text-sm text-gray-900">{{user.skill}}</div>
+                <div class="text-sm text-gray-900">{{request.user.skill}}</div>
                 
               </td>
               <td class="px-6 py-4 whitespace-nowrap">
@@ -88,14 +88,12 @@
                 </span>
               </td>
               <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                <a href="#">Cancel</a>
+                <a href="{% url 'cancel' %}">Cancel</a>
               </td>
 
             </tr>
-
+  
             {% endif %}
-
-
             
 
 

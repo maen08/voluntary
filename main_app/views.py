@@ -10,26 +10,15 @@ from .models import SystemActivitie, SystemUser
 from django.views.generic.base import RedirectView
 from hitcount.models import HitCount
 from hitcount.views import HitCountMixin, HitCountDetailView
+from django.views.generic import DetailView
 
 
+def cancel_view(request):
+    pass
 
 
-# def onbuild_page(request):
-#     return render(request, template_name='build.html')
-
-
-
-# class ApplyLogicView(HitCountDetailView):
-#     model = SystemActivitie
-#     template_name = 'activity.html'
-#     count_hit = True
-#      # the primary key for the hitcount object #}
-#     {{hitcount.pk}}
-
-#          # the total hits for the object #}
-#     {{hitcount.total_hits}}
-
-
+def approve_activity_view(request):
+    pass
 
 
 
@@ -37,24 +26,10 @@ def apply_view(request, activity_id):
     get_activity = get_object_or_404(SystemActivitie, pk=activity_id)
     applied_people = get_activity.apply_number.add(request.user)   # just save in DB the user who applied
 
+    print(type(applied_people))
     # messages.success(request, 'Success, Activity added!')
     return redirect('new_activity')
 
-    # print(type(applied_people))
-
-    # if get_activity.people_required < int(applied_people):
-    #     print('NO ROOM FOR THIS')
-    #     messages.warning(request, 'Sorry, no chance for now!')
-
-
-    # # request.session['people_chances'] = no_people
-    # # request.session['people_applied'] = get_activity.apply_number.add(request.user)
-
-    # else:
-    #     messages.success(request, 'Success, Activity added!')
-    #     return redirect('new_activity')
-
-   
 
 
 
@@ -69,26 +44,20 @@ def applied_activity(request):
     return render(request, template_name='applied-activity.html', context=args)
 
 
+
+
+
 def display_activity(request):
-    # people_chances = request.session.get('people_chances')
-    # people_applied = request.session.get('people_applied')
-
-    # total_people = people_chances.apply_counter()
-
-    # if total_people >= people_applied:
-    #     print('NO ROOM FOR THIS')
-    #     messages.warning(request, 'Sorry, no chance for now!')
-
-    applied = get_object_or_404(SystemActivitie)
+    id = request.POST.get('chance')
+    applied = get_object_or_404(SystemActivitie,)
     applied_no = applied.apply_counter()
-    activities = SystemActivitie.objects.all()
 
-    # if applied_no > activities.people_required
+    activities = SystemActivitie.objects.all()
     for act in activities:
         print(act.people_required)
    
 
-    args = {
+    args = { 
         'activities': activities,
         'applied_no': applied_no
     }

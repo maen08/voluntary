@@ -49,12 +49,12 @@
      <p class="card-text text-sm"><i>Posted: {{actv.time}}</i></p> 
 
      {% if request.user.is_authenticated %}
-    <a href="{% url 'apply' actv.id %}"><button type="button" class="btn btn-primary btn-sm">Apply</button></a> {{ applied_no }}
+     
+    <a href="{% url 'apply' actv.id %}"><button type="button" name="chance" class="btn btn-primary btn-sm">Apply</button></a> {{ applied_no }}
+   
     {% else %}
-    <a href="{% url 'login' %}"><button type="button" class="btn btn-primary btn-sm">Apply</button></a> {{ applied_no }}
-    {% if actv.people_required <= applied_no %}
-    <a href="{% url 'login' %}"><button type="button" class="btn btn-primary btn-sm">No Chances</button></a> {{ applied_no }}
-    {% endif %}
+    <a href="{% url 'login' %}"><button type="button" name="chance" class="btn btn-primary btn-sm">Apply</button></a> {{ applied_no }}
+    
     {% endif %}
   </div>
 </div>

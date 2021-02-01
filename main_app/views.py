@@ -14,17 +14,17 @@ from django.urls import reverse
 import json
 
 
-def cancel_view(request, item_id):
 
+
+
+def cancel_view(request, item_id):
     cancel = SystemActivitie.objects.filter(pk=item_id)
 
     # cancel.delete()
     # print(cancel.delete())
 
     messages.success(request, 'Activity cancelled!')
-    return render(request, template_name='applied-activity.html', context=args
-
-
+    return render(request, template_name='applied-activity.html', context=args)
 
 
 

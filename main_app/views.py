@@ -20,7 +20,10 @@ import json
 def cancel_view(request, item_id):
     cancel = SystemActivitie.objects.filter(pk=item_id)
 
-    # cancel.delete()
+    cancel.delete()
+    args = {
+        'cancel':cancel
+    }
     # print(cancel.delete())
 
     messages.success(request, 'Activity cancelled!')
@@ -38,7 +41,7 @@ def apply_view(request, activity_id):
     request.session['name']=str(get_activity)
 
     messages.success(request, 'Success, Activity added!')
-    titles=SystemActivitie.objects.filter(
+    titles = SystemActivitie.objects.filter(
         apply_number=request.user)
 
     request.session['title']=str(titles)

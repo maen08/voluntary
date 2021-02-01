@@ -12,7 +12,7 @@
                 Name
               </th>
               <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Title
+                Activity
               </th>
               <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Status
@@ -50,10 +50,12 @@
               </td>
               <td class="px-6 py-4 whitespace-nowrap">
                 <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                  Pending
+                  Active
                 </span>
               </td>
+              
               <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                
                 <a href="#">Cancel</a>
               </td>
 
@@ -79,17 +81,21 @@
                 </div>
               </td>
               <td class="px-6 py-4 whitespace-nowrap">
-                <div class="text-sm text-gray-900">{{request.user.skill}}</div>
+                <div class="text-sm text-gray-900">{{ name }}</div>
                 
               </td>
               <td class="px-6 py-4 whitespace-nowrap">
                 <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                  Pending
+                  Active
                 </span>
               </td>
+              <!-- {% for can in cancel %} -->
               <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                <a href="{% url 'cancel' %}">Cancel</a>
+                
+                <a href="">Cancel</a>
+               
               </td>
+              <!-- {% endfor %} -->
 
             </tr>
   

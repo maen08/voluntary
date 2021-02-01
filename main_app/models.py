@@ -7,8 +7,8 @@ User = get_user_model()
 class SystemUser(models.Model):
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
-    # user = models.ForeignKey(User,
-    #  on_delete=models.CASCADE, blank=True, null=True)
+    user = models.ForeignKey(User,
+     on_delete=models.CASCADE, blank=True, null=True)
     email = models.EmailField()
     skill = models.CharField(max_length=50)
 

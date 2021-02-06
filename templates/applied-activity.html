@@ -56,7 +56,7 @@
               
               <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                 
-                <a href="#">Cancel</a>
+                <button type="button" name="delete-btn" value={{activities}} >Cancel</button>
               </td>
 
             </tr>
@@ -84,26 +84,24 @@
                 <div class="text-sm text-gray-900">{{ name }}</div>
                 
               </td>
+              
               <td class="px-6 py-4 whitespace-nowrap">
                 <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
                   Active
                 </span>
               </td>
-              <!-- {% for can in cancel %} -->
+              
+              
               <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                
-                <a href="{% url 'cancel'  can.id %}">Cancel</a>
                
+                <button type="button" name="delete-btn">Cancel</button>
+                
               </td>
-              <!-- {% endfor %} -->
-
+             
             </tr>
-  
+                
             {% endif %}
-            
 
-
-            <!-- More items... -->
           </tbody>
         </table>
       </div>

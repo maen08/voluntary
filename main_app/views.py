@@ -17,17 +17,17 @@ import json
 
 
 
+
+
+
+
+
+
 def cancel_view(request, item_id):
-    cancel = SystemActivitie.objects.filter(pk=item_id)
-
-    cancel.delete()
-    args = {
-        'cancel':cancel
-    }
-    # print(cancel.delete())
-
+    cancel = SystemActivitie.objects.filter(pk=item_id).delete()
+    args = {'cancel':cancel}
     messages.success(request, 'Activity cancelled!')
-    return render(request, template_name='applied-activity.html', context=args)
+    return redirect('applied_activity')
 
 
 
@@ -37,7 +37,7 @@ def apply_view(request, activity_id):
     applied_people = get_activity.apply_number.add(
         request.user)                    # just save in DB the user who applied
 
-    print(get_activity)
+    # print(get_activity)
     request.session['name']=str(get_activity)
 
     messages.success(request, 'Success, Activity added!')
@@ -60,6 +60,15 @@ def applied_activity(request):
         'users': users,
         'name': name
     }
+
+    try:
+        cancel = request.GET.get('delete-btn')
+        print(cancel)
+    # cancel.delete()
+    # messages.success(request, 'Activity cancelled')
+    except:
+        print('FAILED')
+
     return render(request, template_name='applied-activity.html', context=args)
 
 
@@ -69,7 +78,7 @@ def applied_activity(request):
 def display_activity(request):
     if request.method == 'GET':
         id=request.GET.get('chance')
-        print(id)
+        # print(id)
     # user = SystemUser.objects.get(user=request.user)
     # applied = SystemActivitie.objects.filter(apply_number=user)
     # applied_no = applied.apply_counter()
@@ -185,6 +194,7 @@ def login_view(request):  # not real authenticate the password
                 request, 'You dont have an account, please register!')
             return redirect('register')
 
+            
         user=authenticate(
             request,
             username=username, password=password

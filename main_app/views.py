@@ -19,16 +19,31 @@ import json
 
 
 
+def delete_view(request):
+    apply = request.session.get('name')
+    
+    if apply is None:
+        # print('DATA IS NONE')
+        args = {
+            'cancel': 'Cancel',
+            'Passive': 'Active'
+        }
 
+        messages.success(request, 'Activity deleted')
+        return render(request, template_name='applied-activity.html', context=args)
+    
+    else:
+        # print('DATA IS NOT NONE')
+        apply = None
+        args = {
+            'cancel': '--',
+            'Passive': 'Passive',
 
+        }
 
+        return render(request, template_name='applied-activity.html', context=args)
 
-def cancel_view(request, item_id):
-    cancel = SystemActivitie.objects.filter(pk=item_id).delete()
-    args = {'cancel':cancel}
-    messages.success(request, 'Activity cancelled!')
-    return redirect('applied_activity')
-
+    
 
 
 
@@ -38,8 +53,8 @@ def apply_view(request, activity_id):
         request.user)                    # just save in DB the user who applied
 
     # print(get_activity)
-    request.session['name']=str(get_activity)
-
+    request.session['name'] = str(get_activity)
+    
     messages.success(request, 'Success, Activity added!')
     titles = SystemActivitie.objects.filter(
         apply_number=request.user)
@@ -63,13 +78,14 @@ def applied_activity(request):
 
     try:
         cancel = request.GET.get('delete-btn')
-        print(cancel)
+        # print(cancel)
     # cancel.delete()
     # messages.success(request, 'Activity cancelled')
     except:
         print('FAILED')
 
     return render(request, template_name='applied-activity.html', context=args)
+
 
 
 
@@ -183,6 +199,8 @@ def register(request):
     return render(request, template_name='signup.html')
 
 
+
+
 def login_view(request):  # not real authenticate the password
     if request.method == 'POST':
         username=request.POST.get('username')
@@ -204,6 +222,8 @@ def login_view(request):  # not real authenticate the password
         return redirect('new_activity')
 
     return render(request, template_name='login.html')
+
+
 
 
 def logout_view(request):

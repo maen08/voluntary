@@ -27,6 +27,7 @@ class SystemActivitie(models.Model):
     people_required = models.IntegerField()    
     organization = models.CharField(max_length=100)
     apply_number = models.ManyToManyField(User)
+    # active = models.BooleanField(default=False)
 
 
     def apply_counter(self):

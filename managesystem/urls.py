@@ -11,13 +11,14 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls ),
     path('register/', views.register, name='register'),
-    path('cancel/<int:item_id>', views.cancel_view, name='cancel'),
+    # path('cancel/<int:item_id>', views.cancel_view, name='cancel'),
     path('', views.display_activity, name='new_activity'),
     path('create/', views.create_activity, name='create_activity'),
     path('applied/', views.applied_activity, name='applied_activity'),
     path('login/', views.login_view, name='login'),
     path('logout/', views.logout_view, name='logout_view'),
     path('apply/<int:activity_id>', views.apply_view, name='apply'),
+    path('delete/', views.delete_view, name='delete-actv'),
 
 
 

@@ -22,13 +22,12 @@ import json
 def delete_view(request):
     apply = request.session.get('name')
     
-    if apply is None:
+    if  apply is None:
         # print('DATA IS NONE')
         args = {
             
             'status': 'Active',
-            'name': 'No Activity'
-
+        
         }
 
         messages.success(request, 'Activity cancelled')
@@ -76,7 +75,8 @@ def applied_activity(request):
     args={
         'activities': activities,
         'users': users,
-        'name': name
+        'name': name,
+        'status':'Active',
     }
 
     try:

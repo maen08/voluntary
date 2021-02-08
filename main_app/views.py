@@ -25,22 +25,25 @@ def delete_view(request):
     if apply is None:
         # print('DATA IS NONE')
         args = {
-            'cancel': 'Cancel',
-            'Passive': 'Active'
+            
+            'status': 'Active',
+            'name': 'No Activity'
+
         }
 
-        messages.success(request, 'Activity deleted')
+        messages.success(request, 'Activity cancelled')
         return render(request, template_name='applied-activity.html', context=args)
     
     else:
         # print('DATA IS NOT NONE')
         apply = None
         args = {
-            'cancel': '--',
-            'Passive': 'Passive',
+            
+            'status': 'Passive',
+            'name': 'No Activity'
 
         }
-
+        messages.success(request, 'Activity cancelled')
         return render(request, template_name='applied-activity.html', context=args)
 
     
